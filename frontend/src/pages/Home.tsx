@@ -1,7 +1,7 @@
 import { useRef, useState } from "react"
 import MovieCardBig from "../components/MovieCardBig"
 import MovieCardMedium from "../components/MovieCardMedium"
-import MovieCard from "../components/MovieCard"
+import MoviesContainer from "../components/MoviesContainer"
 import SectionHeader from "../components/SectionHeader"
 import big from '../assets/images/big.png'
 import small from '../assets/images/small.png'
@@ -18,18 +18,18 @@ const MEDIUM_CARDS = [
 ]
 
 const SMALL_CARDS = [
-    { title: "Collapse", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 2025, duration: "90", imageUrl: small },
-    { title: "Archer", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 2003, duration: "120", imageUrl: small },
-    { title: "Dark Knight", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 20023, duration: "87", imageUrl: small },
-    { title: "The Lion King", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 2010, duration: "62", imageUrl: small },
-    { title: "Collapse", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 2025, duration: "90", imageUrl: small },
-    { title: "Archer", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 2003, duration: "120", imageUrl: small },
-    { title: "Dark Knight", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 20023, duration: "87", imageUrl: small },
-    { title: "The Lion King", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 2010, duration: "62", imageUrl: small },
-    { title: "Collapse", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 2025, duration: "90", imageUrl: small },
-    { title: "Archer", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 2003, duration: "120", imageUrl: small },
-    { title: "Dark Knight", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 20023, duration: "87", imageUrl: small },
-    { title: "The Lion King", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 2010, duration: "62", imageUrl: small },
+    { id: 1, title: "Collapse", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 2025, duration: "90", imageUrl: small },
+    { id: 2, title: "Archer", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 2003, duration: "120", imageUrl: small },
+    { id: 3, title: "Dark Knight", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 20023, duration: "87", imageUrl: small },
+    { id: 4, title: "The Lion King", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 2010, duration: "62", imageUrl: small },
+    { id: 5, title: "Collapse", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 2025, duration: "90", imageUrl: small },
+    { id: 6, title: "Archer", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 2003, duration: "120", imageUrl: small },
+    { id: 7, title: "Dark Knight", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 20023, duration: "87", imageUrl: small },
+    { id: 8, title: "The Lion King", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 2010, duration: "62", imageUrl: small },
+    { id: 9, title: "Collapse", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 2025, duration: "90", imageUrl: small },
+    { id: 10, title: "Archer", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 2003, duration: "120", imageUrl: small },
+    { id: 11, title: "Dark Knight", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 20023, duration: "87", imageUrl: small },
+    { id: 12, title: "The Lion King", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 2010, duration: "62", imageUrl: small },
 ]
 
 export default function Home() {
@@ -117,51 +117,15 @@ export default function Home() {
             {/* Movie Small Items */}
             <section>
                 <SectionHeader title="Шинээр нэмэгдсэн кинонууд" />
-                <div className="grid grid-cols-6 gap-4">
-                    {SMALL_CARDS.map((card) => (
-                        <div key={card.releaseYear} className="shrink-0">
-                            <MovieCard
-                                title={card.title}
-                                description={card.description}
-                                releaseYear={card.releaseYear}
-                                duration={card.duration}
-                                imageUrl={card.imageUrl}
-                            />
-                        </div>
-                    ))}
-                </div>
+                <MoviesContainer movies={SMALL_CARDS} />
             </section>
             <section>
                 <SectionHeader title="Шинээр нэмэгдсэн цувралууд" />
-                <div className="grid grid-cols-6 gap-4">
-                    {SMALL_CARDS.map((card) => (
-                        <div key={card.releaseYear} className="shrink-0">
-                            <MovieCard
-                                title={card.title}
-                                description={card.description}
-                                releaseYear={card.releaseYear}
-                                duration={card.duration}
-                                imageUrl={card.imageUrl}
-                            />
-                        </div>
-                    ))}
-                </div>
+                <MoviesContainer movies={SMALL_CARDS} />
             </section>
             <section>
                 <SectionHeader title="Шинээр нэмэгдсэн ТВ шоу" />
-                <div className="grid grid-cols-6 gap-4">
-                    {SMALL_CARDS.map((card) => (
-                        <div key={card.releaseYear} className="shrink-0">
-                            <MovieCard
-                                title={card.title}
-                                description={card.description}
-                                releaseYear={card.releaseYear}
-                                duration={card.duration}
-                                imageUrl={card.imageUrl}
-                            />
-                        </div>
-                    ))}
-                </div>
+                <MoviesContainer movies={SMALL_CARDS} />
             </section>
 
         </div>

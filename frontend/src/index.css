@@ -39,3 +39,8 @@ button {
   border-radius: 10px;
   cursor: pointer;
 }
+
+#genre:hover ul {
+  display: flex;
+  flex-direction: column;
+}
