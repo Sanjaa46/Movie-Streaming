@@ -1,1 +1,41 @@
 @import "tailwindcss";
+
+@layer base {
+  :root {
+    --primary-color: #FF770B;
+    --secondary-color: #FFB376;
+    --background-color: #0A0A0A;
+    --text-color: #ffffff;
+  }
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url(./assets/fonts/Montserrat-VariableFont_wght.ttf) format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+* {
+  font-family: "Montserrat", sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  max-width: 1140px;
+  min-height: 100vh;
+  margin: 0 auto;
+}
+
+button {
+  padding: 0.5em 1em;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}

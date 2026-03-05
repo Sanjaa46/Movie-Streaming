@@ -1,0 +1,32 @@
+import movieIcon from '../assets/images/movie-icon.png'
+
+
+export default function MovieCard(
+    { title, description, releaseYear, duration, imageUrl }: { title: string, description: string, releaseYear: number, duration: string, imageUrl: string }
+) {
+    return (
+        <article className="relative w-full h-full rounded-[10px] overflow-hidden shadow-[0_5px_10px_rgba(255,255,255,0.25)] group">
+            <a href={`/frontend/book?article_name=${title}`}>
+                <div className="poster relative overflow-hidden">
+                    <img src={imageUrl} alt={title}
+                        className="w-full transition-all duration-500 group-hover:-translate-y-[50px] group-hover:blur-[5px]" />
+
+                    <div className="absolute bottom-[-80px] left-0 w-full h-full bg-linear-to-t from-[#0e0d0d] to-transparent transition-all duration-500 z-1 group-hover:bottom-0"></div>
+                </div>
+
+                <div
+                    className="details absolute left-0 bottom-[-40px] p-5 w-full z-2 transition-all duration-500 group-hover:bottom-10">
+                    <h3 className="text-white font-bold text-[19px]">{title}</h3>
+
+                    <div className="info text-[12px]">
+                        <div className="flex items-center gap-2">
+                            <img src={movieIcon} alt="mov_icon" />
+                            <p>{releaseYear}-{duration}</p>
+                        </div>
+                        <p className="h-[30px] mb-[-10px] text-white text-[10px]">{description}</p>
+                    </div>
+                </div>
+            </a>
+        </article >
+    )
+}
