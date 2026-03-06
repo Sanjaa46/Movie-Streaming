@@ -124,7 +124,9 @@ export default function MovieDetails() {
                             </button>
                             <CiBookmark className='text-2xl cursor-pointer hover:text-white/50' />
                             <FaRegComment className='text-2xl cursor-pointer hover:text-white/50' />
-                            <MdLocalMovies className='text-2xl cursor-pointer hover:text-white/50' />
+                            <a href={`${MOVIE_DETAIL.trailer}`} target="_blank" rel="noopener noreferrer">
+                                <MdLocalMovies className='text-2xl cursor-pointer hover:text-white/50' />
+                            </a>
                         </div>
                     </article>
                 </div>
