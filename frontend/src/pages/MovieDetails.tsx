@@ -74,15 +74,32 @@ export default function MovieDetails() {
                         }}
                     />
                 </div>
-                <div>
-                    <div className="flex flex-col items-center w-[30%] h-full gap-2">
+                <div className='flex gap-10'>
+                    <div className="flex flex-col items-center w-[20%] h-full gap-2">
                         <img src={MOVIE_DETAIL.smallImg} alt="poster" className='w-full  object-cover border rounded-2xl' />
-                        <div className="flex w-full gap-2 ">
+                        <div className="flex w-full items-center justify-center flex-wrap gap-2">
                             {MOVIE_DETAIL.casts.map((cast, index) => (
-                                <p key={index} className='text-[8px]'>{cast} |</p>
+                                <p key={index} className="text-[8px]">
+                                    {cast}
+                                    {index !== MOVIE_DETAIL.casts.length - 1 && " |"}
+                                </p>
                             ))}
                         </div>
+                        <div className='flex items-center gap-2'>
+                            <span className='text-xl'>{MOVIE_DETAIL.communityRating}</span> <span>⭐️</span>
+                        </div>
                     </div>
+                    <article>
+                        <h1>{MOVIE_DETAIL.title}</h1>
+                        <ul>
+                            <li>{MOVIE_DETAIL.releaseYear}</li>
+                            <li>{MOVIE_DETAIL.duration}</li>
+                            <li>{MOVIE_DETAIL.resolution}</li>
+                            <li>{MOVIE_DETAIL.rating}</li>
+                            <li>{MOVIE_DETAIL.imdbRating}</li>
+                        </ul>
+                        <p>{MOVIE_DETAIL.description}</p>
+                    </article>
                 </div>
             </section>
             {/* Санал болгох кинонууд */}
