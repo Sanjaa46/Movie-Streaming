@@ -1,5 +1,12 @@
 import SectionHeader from '../components/SectionHeader'
 import MoviesContainer from '../components/MoviesContainer'
+import { CiBookmark } from "react-icons/ci";
+import { CgPlayButton } from "react-icons/cg";
+import { FaRegComment } from "react-icons/fa";
+import { MdLocalMovies } from "react-icons/md";
+
+
+
 import big from '../assets/images/big.png'
 import small from '../assets/images/small.png'
 
@@ -14,12 +21,14 @@ const SMALL_CARDS = [
     { id: 8, title: "The Lion King", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 2010, duration: "62", imageUrl: small },
     { id: 9, title: "Collapse", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 2025, duration: "90", imageUrl: small },
     { id: 10, title: "Archer", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 2003, duration: "120", imageUrl: small },
+    { id: 11, title: "Archer", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 2003, duration: "120", imageUrl: small },
+    { id: 12, title: "Archer", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 2003, duration: "120", imageUrl: small },
 ]
 
 const MOVIE_DETAIL = {
     id: 1,
-    title: "Collapse",
-    description: "Lorem ipsum something. This is small Description for small movie card.",
+    title: "Game of Thrones",
+    description: "Lorem ipsum something. This is small Description for small movie card.Lorem ipsum something. This is small Description for small movie card.Lorem ipsum something. This is small Description for small movie card.",
     genres: ["Хүүхдийн", "Адал явдалт"],
     productions: ["AGBO", "Cinestar Pictures", "Big Indie Pictures"],
     countries: ["Canada", "France", "Italy"],
@@ -75,7 +84,7 @@ export default function MovieDetails() {
                     />
                 </div>
                 <div className='flex gap-10'>
-                    <div className="flex flex-col items-center w-[20%] h-full gap-2">
+                    <div className="flex flex-col items-center justify-center w-[20%] h-full gap-2">
                         <img src={MOVIE_DETAIL.smallImg} alt="poster" className='w-full  object-cover border rounded-2xl' />
                         <div className="flex w-full items-center justify-center flex-wrap gap-2">
                             {MOVIE_DETAIL.casts.map((cast, index) => (
@@ -89,24 +98,42 @@ export default function MovieDetails() {
                             <span className='text-xl'>{MOVIE_DETAIL.communityRating}</span> <span>⭐️</span>
                         </div>
                     </div>
-                    <article>
-                        <h1>{MOVIE_DETAIL.title}</h1>
-                        <ul>
-                            <li>{MOVIE_DETAIL.releaseYear}</li>
-                            <li>{MOVIE_DETAIL.duration}</li>
+                    <article className='w-[80%] flex flex-col gap-2 justify-center'>
+                        <h1 className='mb-10 text-5xl'>{MOVIE_DETAIL.title}</h1>
+                        <ul className='flex gap-10'>
                             <li>{MOVIE_DETAIL.resolution}</li>
                             <li>{MOVIE_DETAIL.rating}</li>
-                            <li>{MOVIE_DETAIL.imdbRating}</li>
+                            <li>{MOVIE_DETAIL.releaseYear}</li>
+                            <li>{MOVIE_DETAIL.duration} min</li>
+                            <li>IMDB {MOVIE_DETAIL.imdbRating}</li>
                         </ul>
+                        <div>
+                            <ul className='flex gap-2'>
+                                {MOVIE_DETAIL.genres.map((genre, index) => (
+                                    <li key={index} className='text-[12px] text-white/50'>{genre}
+                                        {index !== MOVIE_DETAIL.genres.length - 1 && " / "}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                         <p>{MOVIE_DETAIL.description}</p>
+                        <div className='flex gap-5 items-center mt-5'>
+                            <button className='flex items-center gap-2'>
+                                <CgPlayButton className='text-2xl' />
+                                PLAY
+                            </button>
+                            <CiBookmark className='text-2xl cursor-pointer hover:text-white/50' />
+                            <FaRegComment className='text-2xl cursor-pointer hover:text-white/50' />
+                            <MdLocalMovies className='text-2xl cursor-pointer hover:text-white/50' />
+                        </div>
                     </article>
                 </div>
-            </section>
+            </section >
             {/* Санал болгох кинонууд */}
-            <section>
+            < section className='mt-10' >
                 <SectionHeader title="Санал болгох кинонууд" />
                 <MoviesContainer movies={SMALL_CARDS} />
-            </section>
-        </div>
+            </section >
+        </div >
     )
 }
