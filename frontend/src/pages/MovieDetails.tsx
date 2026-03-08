@@ -6,7 +6,7 @@ import { FaRegComment } from "react-icons/fa";
 import { MdLocalMovies } from "react-icons/md";
 
 
-
+import tmpVideo from "../assets/videos/tmp.mp4"
 import big from '../assets/images/big.png'
 import small from '../assets/images/small.png'
 
@@ -56,14 +56,24 @@ const MOVIE_DETAIL = {
             createdAt: "2025-01-01"
         }
     ],
-    primeColor: "blue",
+    primeColor: "#1E1B1B",
     smallImg: small,
     bigImg: big
 }
 
 export default function MovieDetails() {
+
+    function watchMovie() {
+        const player = document.getElementById("movie-player")
+        player?.classList.remove("hidden")
+        player?.scrollIntoView({ behavior: "smooth" })
+    }
     return (
         <div>
+            <div id='movie-player' className='flex hidden justify-center w-full mb-10'>
+                <iframe src={tmpVideo} className='w-full h-[500px] rounded-2xl'></iframe>
+            </div>
+
             {/* Киноны дэлгэрэнгүй мэдээлэл */}
             <section className='flex w-full h-[500px] justify-center items-center gap-2'>
                 <div
@@ -118,7 +128,7 @@ export default function MovieDetails() {
                         </div>
                         <p>{MOVIE_DETAIL.description}</p>
                         <div className='flex gap-5 items-center mt-5'>
-                            <button className='flex items-center gap-2'>
+                            <button className='flex items-center gap-2' onClick={watchMovie}>
                                 <CgPlayButton className='text-2xl' />
                                 PLAY
                             </button>

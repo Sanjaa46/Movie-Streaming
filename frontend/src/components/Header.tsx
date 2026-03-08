@@ -1,5 +1,5 @@
 import logo from '../assets/images/logo.png'
-import search from '../assets/images/search.png'
+import searchIcon from '../assets/images/search.png'
 import { useAuth } from '../context/AuthContext'
 import { useState, useRef, useEffect } from 'react'
 import GenreItem from './GenreItem'
@@ -20,14 +20,14 @@ export default function Header() {
     }, [])
 
     return (
-        <header className='flex min-w-[1140px] max-w-[1440px] h-[60px] items-center px-4 pt-4 justify-between mx-auto mb-10'>
+        <header className='flex min-w-285 max-w-360 h-15 items-center px-4 pt-4 justify-between mx-auto mb-10'>
             <a href="/"><img src={logo}
                 alt="Logo"
                 className="h-12 w-12 object-contain " />
             </a>
             <ul className='flex space-x-5 '>
                 <li id='genre' className='relative cursor-pointer transition-colors text-[18px]'>Төрөл
-                    <ul className='hidden absolute top-7 left-[-50px] w-38 items-center justify-center bg-white/20 backdrop-blur-md border border-white/10 rounded-lg shadow-xl overflow-hidden z-50'>
+                    <ul className='hidden absolute top-7 -left-12.5 w-38 items-center justify-center bg-white/20 backdrop-blur-md border border-white/10 rounded-lg shadow-xl overflow-hidden z-50'>
                         <GenreItem genre="Action" />
                         <GenreItem genre="Comedy" />
                         <GenreItem genre="Drama" />
@@ -50,11 +50,11 @@ export default function Header() {
                 <a href="/movies?type=series"><li className='cursor-pointer hover:text-[#FF770B] transition-colors text-[18px]'>Цуврал</li></a>
                 <a href="/movies?type=tv-show"><li className='cursor-pointer hover:text-[#FF770B] transition-colors text-[18px]'>ТВ Шоу</li></a>
             </ul>
-            <div className='relative w-[200px] bg-[#6C6C6C] flex items-center rounded-full px-2'>
-                <img src={search} alt="Search" className='w-[10%]' />
-                <input type="text" placeholder="Хайх..."
+            <form className='relative w-50 bg-[#6C6C6C] flex items-center rounded-full px-2' action={`/movies`} method="GET">
+                <img src={searchIcon} alt="Search" className='w-[10%]' />
+                <input type="text" name="q" placeholder="Хайх..."
                     className=' outline-none bg-transparent ml-2 w-[90%] text-white text-[18px]' />
-            </div>
+            </form>
 
             {isAuthenticated ? (
                 <div className="relative" ref={menuRef}>
@@ -65,7 +65,7 @@ export default function Header() {
                         <div className="w-9 h-9 rounded-full bg-[#FF770B] flex items-center justify-center font-bold text-white text-sm select-none">
                             {user!.username.charAt(0).toUpperCase()}
                         </div>
-                        <span className="text-sm text-white/80 max-w-[100px] truncate">{user!.username}</span>
+                        <span className="text-sm text-white/80 max-w-25 truncate">{user!.username}</span>
                     </div>
 
                     {isMenuOpen && (

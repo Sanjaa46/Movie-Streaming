@@ -9,21 +9,21 @@ export default function MovieCard(
             <a href={`/movies/${movie.id}`}>
                 <div className="poster relative overflow-hidden">
                     <img src={movie.imageUrl} alt={movie.title}
-                        className="w-full transition-all duration-500 group-hover:-translate-y-[50px] group-hover:blur-[5px]" />
+                        className="w-full transition-all duration-500 group-hover:-translate-y-12.5 group-hover:blur-[5px]" />
 
-                    <div className="absolute bottom-[-80px] left-0 w-full h-full bg-linear-to-t from-[#0e0d0d] to-transparent transition-all duration-500 z-1 group-hover:bottom-0"></div>
+                    <div className="absolute -bottom-20 left-0 w-full h-full bg-linear-to-t from-[#0e0d0d] to-transparent transition-all duration-500 z-1 group-hover:bottom-0"></div>
                 </div>
 
                 <div
-                    className="details absolute left-0 bottom-[-40px] p-5 w-full z-2 transition-all duration-500 group-hover:bottom-10">
+                    className="details absolute left-0 -bottom-10 p-5 w-full z-2 transition-all duration-500 group-hover:bottom-10">
                     <h3 className="text-white font-bold text-[19px]">{movie.title}</h3>
 
                     <div className="info text-[12px]">
                         <div className="flex items-center gap-2">
                             <img src={movieIcon} alt="mov_icon" />
-                            <p>{movie.releaseYear}-{movie.duration}</p>
+                            <p>{movie.releaseYear}-{movie.duration} min</p>
                         </div>
-                        <p className="h-[30px] mb-[-10px] text-white text-[10px]">{movie.description}</p>
+                        <p className="h-7.5 -mb-2.5 text-white text-[10px]">{movie.description}</p>
                     </div>
                 </div>
             </a>
