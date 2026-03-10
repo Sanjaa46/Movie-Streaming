@@ -3,34 +3,8 @@ import MovieCardBig from "../components/MovieCardBig"
 import MovieCardMedium from "../components/MovieCardMedium"
 import MoviesContainer from "../components/MoviesContainer"
 import SectionHeader from "../components/SectionHeader"
+import { SLIDES, MEDIUM_CARDS, SMALL_CARDS } from "../data/mockData"
 import big from '../assets/images/big.png'
-import small from '../assets/images/small.png'
-
-const SLIDES = [0, 1, 2]
-
-const MEDIUM_CARDS = [
-    { title: "Frozen", genres: ["Хүүхдийн", "Адал явдалт"], rank: 1, imageUrl: big },
-    { title: "Inception", genres: ["Sci-Fi", "Триллер"], rank: 2, imageUrl: big },
-    { title: "The Lion King", genres: ["Хүүхдийн", "Дуурь"], rank: 3, imageUrl: big },
-    { title: "Interstellar", genres: ["Sci-Fi", "Драм"], rank: 4, imageUrl: big },
-    { title: "Avengers", genres: ["Үйлдэлт", "Адал явдалт"], rank: 5, imageUrl: big },
-    { title: "The Dark Knight", genres: ["Үйлдэлт", "Гэмт хэрэг"], rank: 6, imageUrl: big },
-]
-
-const SMALL_CARDS = [
-    { id: 1, title: "Collapse", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 2025, duration: "90", imageUrl: small },
-    { id: 2, title: "Archer", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 2003, duration: "120", imageUrl: small },
-    { id: 3, title: "Dark Knight", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 20023, duration: "87", imageUrl: small },
-    { id: 4, title: "The Lion King", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 2010, duration: "62", imageUrl: small },
-    { id: 5, title: "Collapse", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 2025, duration: "90", imageUrl: small },
-    { id: 6, title: "Archer", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 2003, duration: "120", imageUrl: small },
-    { id: 7, title: "Dark Knight", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 20023, duration: "87", imageUrl: small },
-    { id: 8, title: "The Lion King", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 2010, duration: "62", imageUrl: small },
-    { id: 9, title: "Collapse", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 2025, duration: "90", imageUrl: small },
-    { id: 10, title: "Archer", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 2003, duration: "120", imageUrl: small },
-    { id: 11, title: "Dark Knight", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 20023, duration: "87", imageUrl: small },
-    { id: 12, title: "The Lion King", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 2010, duration: "62", imageUrl: small },
-]
 
 export default function Home() {
     const [current, setCurrent] = useState(0)
@@ -105,8 +79,8 @@ export default function Home() {
                         <div key={card.rank} className="shrink-0">
                             <MovieCardMedium
                                 title={card.title}
-                                genres={card.genres}
-                                rank={card.rank}
+                                genres={card.genres || []}
+                                rank={card.rank || 0}
                                 imageUrl={card.imageUrl}
                             />
                         </div>
