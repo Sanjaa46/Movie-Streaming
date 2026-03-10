@@ -1,8 +1,9 @@
 import logo from '../assets/images/logo.png'
-import searchIcon from '../assets/images/search.png'
 import { useAuth } from '../context/AuthContext'
 import { useState, useRef, useEffect } from 'react'
 import GenreItem from './GenreItem'
+
+import { CiSearch } from "react-icons/ci";
 
 export default function Header() {
     const { isAuthenticated, user, logout, openLogin } = useAuth()
@@ -51,7 +52,7 @@ export default function Header() {
                 <a href="/movies?type=tv-show"><li className='cursor-pointer hover:text-[#FF770B] transition-colors text-[18px]'>ТВ Шоу</li></a>
             </ul>
             <form className='relative w-50 bg-[#6C6C6C] flex items-center rounded-full px-2' action={`/movies`} method="GET">
-                <img src={searchIcon} alt="Search" className='w-[10%]' />
+                <CiSearch className='text-[24px]' />
                 <input type="text" name="q" placeholder="Хайх..."
                     className=' outline-none bg-transparent ml-2 w-[90%] text-white text-[18px]' />
             </form>

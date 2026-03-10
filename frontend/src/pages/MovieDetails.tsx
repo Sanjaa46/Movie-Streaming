@@ -1,6 +1,7 @@
 import SectionHeader from '../components/SectionHeader'
 import MoviesContainer from '../components/MoviesContainer'
 import Comments from '../components/Comments';
+import { useState } from 'react';
 import { CiBookmark } from "react-icons/ci";
 import { CgPlayButton } from "react-icons/cg";
 import { FaRegComment } from "react-icons/fa";
@@ -56,6 +57,41 @@ const MOVIE_DETAIL = {
             comment: "Lorem ipsum something. This is comment for movie card.",
             rating: 3,
             createdAt: "2025-01-01"
+        },
+        {
+            id: 3,
+            username: "Smith Doe",
+            comment: "Lorem ipsum something. This is comment for movie card.",
+            rating: 3,
+            createdAt: "2025-01-01"
+        },
+        {
+            id: 4,
+            username: "Smith Doe",
+            comment: "Lorem ipsum something. This is comment for movie card.",
+            rating: 3,
+            createdAt: "2025-01-01"
+        },
+        {
+            id: 5,
+            username: "Smith Doe",
+            comment: "Lorem ipsum something. This is comment for movie card.",
+            rating: 3,
+            createdAt: "2025-01-01"
+        },
+        {
+            id: 6,
+            username: "Smith Doe",
+            comment: "Lorem ipsum something. This is comment for movie card.",
+            rating: 3,
+            createdAt: "2025-01-01"
+        },
+        {
+            id: 7,
+            username: "Smith Doe",
+            comment: "Lorem ipsum something. This is comment for movie card.",
+            rating: 3,
+            createdAt: "2025-01-01"
         }
     ],
     primeColor: "#1E1B1B",
@@ -64,6 +100,7 @@ const MOVIE_DETAIL = {
 }
 
 export default function MovieDetails() {
+    const [showComments, setShowComments] = useState(false);
 
     function watchMovie() {
         const player = document.getElementById("movie-player")
@@ -136,7 +173,8 @@ export default function MovieDetails() {
                                 PLAY
                             </button>
                             <CiBookmark className='text-2xl cursor-pointer hover:text-white/50' />
-                            <FaRegComment className='text-2xl cursor-pointer hover:text-white/50' />
+                            <FaRegComment className='text-2xl cursor-pointer hover:text-white/50' onClick={() => setShowComments(true)} />
+                            {showComments && <Comments comments={MOVIE_DETAIL.comments} onClose={() => setShowComments(false)} />}
                             <a href={`${MOVIE_DETAIL.trailer}`} target="_blank" rel="noopener noreferrer">
                                 <MdLocalMovies className='text-2xl cursor-pointer hover:text-white/50' />
                             </a>
