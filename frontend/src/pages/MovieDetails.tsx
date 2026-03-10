@@ -1,5 +1,6 @@
 import SectionHeader from '../components/SectionHeader'
 import MoviesContainer from '../components/MoviesContainer'
+import Comments from '../components/Comments';
 import { CiBookmark } from "react-icons/ci";
 import { CgPlayButton } from "react-icons/cg";
 import { FaRegComment } from "react-icons/fa";
@@ -9,6 +10,7 @@ import { MdLocalMovies } from "react-icons/md";
 import tmpVideo from "../assets/videos/tmp.mp4"
 import big from '../assets/images/big.png'
 import small from '../assets/images/small.png'
+import VideoPlayer from '../components/VideoPlayer'
 
 const SMALL_CARDS = [
     { id: 1, title: "Collapse", description: "Lorem ipsum something. This is small Description for small movie card.", releaseYear: 2025, duration: "90", imageUrl: small },
@@ -66,12 +68,13 @@ export default function MovieDetails() {
     function watchMovie() {
         const player = document.getElementById("movie-player")
         player?.classList.remove("hidden")
+        player?.classList.add("flex")
         player?.scrollIntoView({ behavior: "smooth" })
     }
     return (
         <div>
-            <div id='movie-player' className='flex hidden justify-center w-full mb-10'>
-                <iframe src={tmpVideo} className='w-full h-[500px] rounded-2xl'></iframe>
+            <div id='movie-player' className='hidden justify-center w-full my-10'>
+                <VideoPlayer src={tmpVideo} />
             </div>
 
             {/* Киноны дэлгэрэнгүй мэдээлэл */}
