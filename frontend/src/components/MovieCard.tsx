@@ -16,7 +16,7 @@ export default function MovieCard(
 
                 <div
                     className="details absolute left-0 -bottom-10 p-5 w-full z-2 transition-all duration-500 group-hover:bottom-10">
-                    <h3 className="text-white font-bold text-[19px]">{movie.title}</h3>
+                    <h3 className="text-white font-bold text-[16px]">{movie.title}</h3>
 
                     <div className="info text-[12px]">
                         <div className="flex items-center gap-2">

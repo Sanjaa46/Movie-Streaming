@@ -1,17 +1,39 @@
+import { useState } from 'react'
+import { GrNext } from "react-icons/gr";
+import { GrPrevious } from "react-icons/gr";
 import MoviesContainer from '../components/MoviesContainer'
 import FilterItem from '../components/FilterItem'
 import { SMALL_CARDS } from '../data/mockData'
 
+// Generate more items for pagination demonstration
+const ALL_MOVIES = Array.from({ length: 36 }).map((_, index) => ({
+    ...SMALL_CARDS[index % SMALL_CARDS.length],
+    id: index + 1 // Ensure unique IDs
+}))
+
 export default function Movies() {
+    const [currentPage, setCurrentPage] = useState(1)
+    const itemsPerPage = 12
+
+    const totalPages = Math.ceil(ALL_MOVIES.length / itemsPerPage)
+    const startIndex = (currentPage - 1) * itemsPerPage
+    const currentMovies = ALL_MOVIES.slice(startIndex, startIndex + itemsPerPage)
+
+    const handlePageChange = (page: number) => {
+        if (page >= 1 && page <= totalPages) {
+            setCurrentPage(page)
+        }
+    }
+
     return (
         <section className="mt-10">
             <div className="">
                 <div className="flex items-center justify-between">
                     <h1 className="text-2xl font-bold">All Movies</h1>
-                    <p className="text-gray-400">12 Movies</p>
+                    <p className="text-gray-400">{ALL_MOVIES.length} Movies</p>
                 </div>
                 {/* Line */}
-                <div className="w-full h-1 bg-gray-200"></div>
+                <div className="w-full h-1 bg-gray-200 mt-2"></div>
             </div>
             {/* Filters */}
             <div className='w-full h-10 mt-3'>
@@ -25,8 +47,48 @@ export default function Movies() {
                 </form>
             </div>
             <div className="mt-10">
-                <MoviesContainer movies={SMALL_CARDS} />
+                <MoviesContainer movies={currentMovies} />
             </div>
+
+            {/* Pagination Controls */}
+            {totalPages > 1 && (
+                <div className="flex justify-center items-center mt-10 space-x-2 pb-10">
+                    <button
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        disabled={currentPage === 1}
+                        className={`px-4 py-2 h-10 flex items-center justify-center rounded-md transition-colors ${currentPage === 1
+                            ? 'bg-gray-800 text-gray-500 cursor-not-allowed'
+                            : 'bg-gray-800 text-white hover:bg-gray-700'
+                            }`}
+                    >
+                        <GrPrevious />
+                    </button>
+
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                        <button
+                            key={page}
+                            onClick={() => handlePageChange(page)}
+                            className={`w-10 h-10 flex items-center justify-center rounded-md transition-colors ${currentPage === page
+                                ? 'bg-primary-color text-white'
+                                : 'bg-gray-800 text-white hover:bg-gray-700'
+                                }`}
+                        >
+                            {page}
+                        </button>
+                    ))}
+
+                    <button
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        disabled={currentPage === totalPages}
+                        className={`px-4 py-2 h-10 flex items-center justify-center rounded-md transition-colors ${currentPage === totalPages
+                            ? 'bg-gray-800 text-gray-500 cursor-not-allowed'
+                            : 'bg-gray-800 text-white hover:bg-gray-700'
+                            }`}
+                    >
+                        <GrNext />
+                    </button>
+                </div>
+            )}
         </section>
     )
 }

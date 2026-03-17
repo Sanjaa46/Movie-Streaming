@@ -21,7 +21,7 @@
 }
 
 ::-webkit-scrollbar {
-    width: 8px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -48,13 +48,15 @@ body {
   margin: 0 auto;
 }
 
-button {
-  padding: 0.5em 1em;
-  background-color: var(--primary-color);
-  color: var(--text-color);
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
+@layer base {
+  button {
+    padding: 0.5em 1em;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
 }
 
 #genre:hover ul {
