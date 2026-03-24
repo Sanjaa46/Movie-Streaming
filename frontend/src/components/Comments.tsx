@@ -11,7 +11,7 @@ export default function Comments({ comments, onClose }: { comments: any[], onClo
 
     return (
         <section className="fixed flex items-center justify-center bottom-0 left-0 right-0 z-999 w-screen h-screen bg-black/50" onClick={handleOverlayClick}>
-            <div className="w-[50%] h-[50%] flex items-center justify-center rounded-2xl bg-black/90">
+            <div className="w-[50%] h-[70%] flex items-center justify-center rounded-2xl bg-black/90">
                 <div className=" w-[80%] h-[80%]">
                     <h1 className="text-2xl">Comments</h1>
                     <p className="text-[10px]">{comments.length} comments</p>

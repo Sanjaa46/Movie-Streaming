@@ -1,6 +1,7 @@
 import logo from '../assets/images/logo.png'
 import { useAuth } from '../context/AuthContext'
 import { useState, useRef, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import GenreItem from './GenreItem'
 
 import { CiSearch } from "react-icons/ci";
@@ -71,9 +72,9 @@ export default function Header() {
 
                     {isMenuOpen && (
                         <div className="absolute right-0 top-12 w-48 bg-[#141414] border border-white/10 rounded-lg shadow-xl overflow-hidden z-50 flex flex-col">
-                            <button className="text-left px-4 py-3 text-sm text-white/80 hover:bg-white/10 hover:text-white transition-colors bg-transparent rounded-none cursor-pointer">Continue watch</button>
-                            <button className="text-left px-4 py-3 text-sm text-white/80 hover:bg-white/10 hover:text-white transition-colors bg-transparent rounded-none cursor-pointer">Bookmarked</button>
-                            <button className="text-left px-4 py-3 text-sm text-white/80 hover:bg-white/10 hover:text-white transition-colors bg-transparent rounded-none cursor-pointer">Watched</button>
+                            <Link to="/user/continue" onClick={() => setIsMenuOpen(false)} className="block text-left px-4 py-3 text-sm text-white/80 hover:bg-white/10 hover:text-white transition-colors bg-transparent rounded-none cursor-pointer">Continue watch</Link>
+                            <Link to="/user/bookmarked" onClick={() => setIsMenuOpen(false)} className="block text-left px-4 py-3 text-sm text-white/80 hover:bg-white/10 hover:text-white transition-colors bg-transparent rounded-none cursor-pointer">Bookmarked</Link>
+                            <Link to="/user/watched" onClick={() => setIsMenuOpen(false)} className="block text-left px-4 py-3 text-sm text-white/80 hover:bg-white/10 hover:text-white transition-colors bg-transparent rounded-none cursor-pointer">Watched</Link>
                             <div className="h-px bg-white/10 w-full" />
                             <button
                                 onClick={() => {
