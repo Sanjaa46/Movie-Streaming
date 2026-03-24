@@ -43,7 +43,7 @@ export default function Movies() {
                     <FilterItem name='Country' options={["USA", "Mongolia", "Japan"]} />
                     <FilterItem name='IMDB Rating' options={["0-1", "1-2", "2-3", "3-4", "4-5", "5-6", "6-7", "7-8", "8-9", "9-10"]} />
                     <FilterItem name='Movie Rating' options={["G", "PG", "PG-13", "R", "NC-17"]} />
-                    <button type="submit" className="bg-[#FF770B] hover:bg-[#e06800] text-white text-sm px-4 py-1.5 rounded-lg transition-colors font-semibold">Хайх</button>
+                    <button type="submit" className="bg-[#FF770B] hover:bg-[#e06800] text-white text-sm px-4 py-1.5 rounded-lg transition-colors font-semibold grow-1">Хайх</button>
                 </form>
             </div>
 

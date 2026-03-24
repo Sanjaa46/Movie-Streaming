@@ -121,7 +121,7 @@ export default function VideoPlayer({ src, poster }: VideoPlayerProps) {
     return (
         <div
             ref={playerRef}
-            className="group relative w-full h-[500px] bg-black rounded-2xl overflow-hidden flex items-center justify-center isolate"
+            className="group relative w-full h-[220px] sm:h-[320px] md:h-[420px] lg:h-[500px] bg-black rounded-2xl overflow-hidden flex items-center justify-center isolate"
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             onContextMenu={(e) => e.preventDefault()} // Prevent right click (download protection)
