@@ -1,4 +1,4 @@
-import { useRef, useState } from "react"
+import { useRef, useState, useEffect } from "react"
 import MovieCardBig from "../components/MovieCardBig"
 import MovieCardMedium from "../components/MovieCardMedium"
 import MoviesContainer from "../components/MoviesContainer"
@@ -8,13 +8,29 @@ import big from '../assets/images/big.png'
 
 export default function Home() {
     const [current, setCurrent] = useState(0)
+    const isHoveringHero = useRef(false)
+
+    // Horizontal drag-scroll refs for medium cards
     const sliderRef = useRef<HTMLDivElement>(null)
     const isDragging = useRef(false)
     const startX = useRef(0)
     const scrollLeft = useRef(0)
+    const dragMoved = useRef(false) // track whether the pointer actually moved
 
+    // ── Auto-slider ──────────────────────────────────────────────────
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (!isHoveringHero.current) {
+                setCurrent(c => (c + 1) % SLIDES.length)
+            }
+        }, 4000)
+        return () => clearInterval(interval)
+    }, [])
+
+    // ── Drag-scroll handlers ─────────────────────────────────────────
     const onMouseDown = (e: React.MouseEvent) => {
         isDragging.current = true
+        dragMoved.current = false
         startX.current = e.pageX - (sliderRef.current?.offsetLeft ?? 0)
         scrollLeft.current = sliderRef.current?.scrollLeft ?? 0
         if (sliderRef.current) sliderRef.current.style.cursor = "grabbing"
@@ -23,6 +39,7 @@ export default function Home() {
     const onMouseMove = (e: React.MouseEvent) => {
         if (!isDragging.current) return
         e.preventDefault()
+        dragMoved.current = true
         const x = e.pageX - (sliderRef.current?.offsetLeft ?? 0)
         const walk = x - startX.current
         if (sliderRef.current) sliderRef.current.scrollLeft = scrollLeft.current - walk
@@ -35,17 +52,21 @@ export default function Home() {
 
     return (
         <div className="flex flex-col gap-15">
-            {/* Movie big item Section */}
-            <section className="relative w-full overflow-hidden">
+            {/* Hero slider */}
+            <section
+                className="relative w-full overflow-hidden"
+                onMouseEnter={() => { isHoveringHero.current = true }}
+                onMouseLeave={() => { isHoveringHero.current = false }}
+            >
                 {/* Slides track */}
                 <div
                     className="flex transition-transform duration-500 ease-in-out"
                     style={{ transform: `translateX(-${current * 100}%)` }}
                 >
                     {SLIDES.map((_, i) => (
-                        <div key={i} className="min-w-full">
+                        <a key={i} href={`/movies/${MEDIUM_CARDS[i]?.id ?? i + 1}`} className="min-w-full block">
                             <MovieCardBig title="Frozen" rating={7} duration="120 min" genre="Хүүхдийн" imageUrl={big} resolution="HD" />
-                        </div>
+                        </a>
                     ))}
                 </div>
 
@@ -54,18 +75,16 @@ export default function Home() {
                     {SLIDES.map((_, i) => (
                         <div
                             key={i}
-                            onClick={() => setCurrent(i)}
+                            onClick={(e) => { e.preventDefault(); setCurrent(i) }}
                             className={`w-3 h-3 rounded-full transition-all cursor-pointer ${i === current ? "bg-white scale-125" : "bg-white/40"}`}
                         />
                     ))}
                 </div>
             </section>
 
-            {/* Most Viewed Movies section */}
+            {/* Most Viewed Movies — draggable horizontal scroll */}
             <section>
                 <SectionHeader title="Их үзэлттэй" />
-
-                {/* Horizontally scrollable slider — drag with cursor */}
                 <div
                     ref={sliderRef}
                     onMouseDown={onMouseDown}
@@ -76,7 +95,16 @@ export default function Home() {
                     style={{ scrollbarWidth: "none", cursor: "grab" }}
                 >
                     {MEDIUM_CARDS.map((card) => (
-                        <div key={card.rank} className="shrink-0">
+                        <div
+                            key={card.rank}
+                            className="shrink-0"
+                            onClick={() => {
+                                // Only navigate if the user didn't drag
+                                if (!dragMoved.current) {
+                                    window.location.href = `/movies/${card.id}`
+                                }
+                            }}
+                        >
                             <MovieCardMedium
                                 title={card.title}
                                 genres={card.genres || []}
@@ -104,4 +132,4 @@ export default function Home() {
 
         </div>
     )
-}
+}
