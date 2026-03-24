@@ -11,6 +11,7 @@ import { SMALL_CARDS, MOVIE_DETAIL } from '../data/mockData'
 
 export default function MovieDetails() {
     const [showComments, setShowComments] = useState(false);
+    const [descExpanded, setDescExpanded] = useState(false);
 
     function watchMovie() {
         const player = document.getElementById("movie-player")
@@ -33,11 +34,11 @@ export default function MovieDetails() {
                     <img
                         src={MOVIE_DETAIL.bigImg}
                         alt="banner"
-                        className="absolute w-[70%] right-0 top-0 object-cover"
+                        className="absolute w-[70%] right-0 top-0 object-cover max-[1250px]:hidden"
                     />
 
                     <div
-                        className="absolute inset-0"
+                        className="absolute inset-0 max-[1250px]:hidden"
                         style={{
                             background: `radial-gradient(ellipse at 110% 0% , transparent 20%, ${MOVIE_DETAIL.primeColor} 50%)`,
                         }}
@@ -76,7 +77,17 @@ export default function MovieDetails() {
                                 ))}
                             </ul>
                         </div>
-                        <p>{MOVIE_DETAIL.description}</p>
+                        <div>
+                            <p className={descExpanded ? '' : 'max-[1250px]:line-clamp-3'}>
+                                {MOVIE_DETAIL.description}
+                            </p>
+                            <a
+                                onClick={() => setDescExpanded(v => !v)}
+                                className="hidden max-[1250px]:block text-[#FF770B] text-sm mt-1 hover:underline cursor-pointer"
+                            >
+                                {descExpanded ? 'Less' : '...more'}
+                            </a>
+                        </div>
                         <div className='flex gap-5 items-center mt-5'>
                             <button className='flex items-center gap-2' onClick={watchMovie}>
                                 <CgPlayButton className='text-2xl' />

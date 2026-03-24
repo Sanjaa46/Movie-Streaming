@@ -3,7 +3,7 @@ export default function MovieCardMedium(
 ) {
     return (
         <div
-            className="relative w-[420px] h-[240px] rounded-2xl p-5"
+            className="relative w-[260px] sm:w-[340px] md:w-[420px] h-[160px] sm:h-[200px] md:h-[240px] rounded-2xl p-5"
             style={{
                 backgroundImage: `url(${imageUrl})`,
                 backgroundSize: "cover",
