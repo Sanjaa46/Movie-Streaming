@@ -13,6 +13,10 @@ export default function MovieDetails() {
     const [showComments, setShowComments] = useState(false);
     const [descExpanded, setDescExpanded] = useState(false);
 
+    // Default to the first season and first episode if it's a series
+    const [selectedSeason, setSelectedSeason] = useState(MOVIE_DETAIL.seasons?.[0]);
+    const [selectedEpisode, setSelectedEpisode] = useState(MOVIE_DETAIL.seasons?.[0]?.episodes[0]);
+
     function watchMovie() {
         const player = document.getElementById("movie-player")
         player?.classList.remove("hidden")
@@ -22,7 +26,7 @@ export default function MovieDetails() {
     return (
         <div>
             <div id='movie-player' className='hidden justify-center w-full my-6 px-4'>
-                <VideoPlayer src={MOVIE_DETAIL.videoUrl || ""} />
+                <VideoPlayer src={(MOVIE_DETAIL.isSeries ? selectedEpisode?.videoUrl : MOVIE_DETAIL.videoUrl) || ""} />
             </div>
 
             {/* Киноны дэлгэрэнгүй мэдээлэл */}
@@ -114,6 +118,51 @@ export default function MovieDetails() {
                     </article>
                 </div>
             </section>
+
+            {/* Эпизодууд / Episodes (Only visible for series) */}
+            {MOVIE_DETAIL.isSeries && MOVIE_DETAIL.seasons && (
+                <section className='mt-10 px-4 max-w-5xl mx-auto'>
+                    <div className='flex items-center justify-between mb-6'>
+                        <h2 className='text-xl sm:text-2xl font-bold'>Ангиуд</h2>
+                        <select 
+                            className='bg-[#1E1B1B] border border-white/20 rounded-lg px-3 py-1.5 sm:px-4 sm:py-2 outline-none text-white cursor-pointer'
+                            value={selectedSeason?.id}
+                            onChange={(e) => {
+                                const season = MOVIE_DETAIL.seasons?.find(s => s.id === Number(e.target.value));
+                                setSelectedSeason(season);
+                                setSelectedEpisode(season?.episodes[0]);
+                            }}
+                        >
+                            {MOVIE_DETAIL.seasons.map(season => (
+                                <option key={season.id} value={season.id}>
+                                    Улирал {season.seasonNumber}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className='flex flex-col gap-3'>
+                        {selectedSeason?.episodes.map(episode => (
+                            <div 
+                                key={episode.id}
+                                className={`flex items-center justify-between p-4 rounded-xl cursor-pointer transition-colors ${selectedEpisode?.id === episode.id ? 'bg-[#FF770B]/20 border border-[#FF770B]/50' : 'bg-white/5 hover:bg-white/10'}`}
+                                onClick={() => {
+                                    setSelectedEpisode(episode);
+                                    watchMovie();
+                                }}
+                            >
+                                <div className='flex items-center gap-4'>
+                                    <div className='text-3xl font-bold text-white/20 w-10 text-center'>{episode.episodeNumber}</div>
+                                    <div className='flex flex-col'>
+                                        <h3 className={`text-sm sm:text-base font-medium ${selectedEpisode?.id === episode.id ? 'text-[#FF770B]' : 'text-white'}`}>{episode.title}</h3>
+                                        <span className='text-xs text-white/50'>{episode.duration}</span>
+                                    </div>
+                                </div>
+                                <CgPlayButton className={`text-3xl ${selectedEpisode?.id === episode.id ? 'text-[#FF770B]' : 'text-white/30'}`} />
+                            </div>
+                        ))}
+                    </div>
+                </section>
+            )}
 
             {/* Санал болгох кинонууд */}
             <section className='mt-10 px-4'>

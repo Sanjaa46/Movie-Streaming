@@ -12,6 +12,20 @@ export interface Comment {
     createdAt: string;
 }
 
+export interface Episode {
+    id: number;
+    title: string;
+    duration: string;
+    episodeNumber: number;
+    videoUrl?: string; // Optional per-episode url
+}
+
+export interface Season {
+    id: number;
+    seasonNumber: number;
+    episodes: Episode[];
+}
+
 export interface MovieDetail {
     id: number;
     title: string;
@@ -21,7 +35,7 @@ export interface MovieDetail {
     countries: string[];
     casts: string[];
     releaseYear: number;
-    duration: string;
+    duration: string; // Keep as string for overall average or total, or empty for series
     resolution: string;
     rating: string;
     imdbRating: number;
@@ -32,6 +46,8 @@ export interface MovieDetail {
     smallImg: string;
     bigImg: string;
     videoUrl?: string;
+    isSeries?: boolean;
+    seasons?: Season[];
 }
 
 export interface MovieCard {
@@ -144,5 +160,25 @@ export const MOVIE_DETAIL: MovieDetail = {
     primeColor: "#1E1B1B",
     smallImg: small,
     bigImg: big,
-    videoUrl: tmpVideo
+    videoUrl: tmpVideo,
+    isSeries: true,
+    seasons: [
+        {
+            id: 1,
+            seasonNumber: 1,
+            episodes: [
+                { id: 101, title: "Winter Is Coming", duration: "62 min", episodeNumber: 1, videoUrl: tmpVideo },
+                { id: 102, title: "The Kingsroad", duration: "56 min", episodeNumber: 2, videoUrl: tmpVideo },
+                { id: 103, title: "Lord Snow", duration: "58 min", episodeNumber: 3, videoUrl: tmpVideo }
+            ]
+        },
+        {
+            id: 2,
+            seasonNumber: 2,
+            episodes: [
+                { id: 201, title: "The North Remembers", duration: "53 min", episodeNumber: 1, videoUrl: tmpVideo },
+                { id: 202, title: "The Night Lands", duration: "54 min", episodeNumber: 2, videoUrl: tmpVideo }
+            ]
+        }
+    ]
 };
